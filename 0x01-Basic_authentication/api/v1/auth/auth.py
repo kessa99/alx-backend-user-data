@@ -24,7 +24,7 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """Public method to return the current user"""
         return None
-    
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Public method to require authentication"""
         if path is None or excluded_paths is None or len(excluded_paths) == 0:
@@ -34,7 +34,7 @@ class Auth:
         if path in excluded_paths:
             return False
         return True
-    
+
     def authorization_header(self, request=None) -> str:
         """Public method to authorize the header"""
         if request is None or 'Authorization' not in request.headers:
