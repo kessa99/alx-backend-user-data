@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import jsonify, abort, request
 from typing import List, TypeVar
 
