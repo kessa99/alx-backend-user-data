@@ -44,3 +44,13 @@ class Auth:
         if request is None or 'Authorization' not in request.headers:
             return None
         return request.headers['Authorization']
+
+    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+        """public method to require authentication"""
+        if path is None or excluded_paths is None or len(excluded_paths) == 0:
+            return True
+        if path[-1] != '/':
+            path += '/'
+        if path in excluded_paths:
+            return False
+        return True
