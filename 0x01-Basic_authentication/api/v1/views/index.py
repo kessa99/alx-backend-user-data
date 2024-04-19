@@ -3,7 +3,7 @@
 """
 from flask import jsonify, abort
 from api.v1.views import app_views
-
+from api.v1.auth.auth import Auth
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status() -> str:
@@ -42,3 +42,4 @@ def forbidden() -> str:
       - Error 403
     """
     abort(403)
+  
