@@ -21,11 +21,10 @@ class Auth:
 
     def authorization_header(self, request=None) -> str:
         """Public method to authorize the header"""
-        key = 'Authorization' 
+        key = 'Authorization'
         if request is None or key not in request.headers:
             return None
         return request.headers.get(key)
-
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Public method to return the current user"""
