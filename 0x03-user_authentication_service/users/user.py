@@ -12,7 +12,6 @@ class User(Base):
     email: str
     hashed_password: str
     session_id: str
-    session_token: str
     reset_token: str
     """
     __tablename__ = 'users'
@@ -21,7 +20,6 @@ class User(Base):
     email = Column(String(250), nullable=False)
     hashed_password = Column(String(250), nullable=False)
     session_id = Column(String(250), nullable=True)
-    session_token = Column(String(250), nullable=True)
     reset_token = Column(String(250), nullable=True)
 
     # def __init__(self, email, hashed_password):

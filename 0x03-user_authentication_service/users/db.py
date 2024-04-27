@@ -36,19 +36,24 @@ class DB:
         """Add a user to the database
         """
         user = User(email=email, hashed_password=hashed_password)
-        self._session.add(user)
-        self._session.commit()
+        try:
+            self._session.add(user)
+            self._session.commit()
+        except Exception as e:
+            print(f'Error: {e}')
+            self._session.rollback()
+            raise
         return user
     
     def find_user_by(self, **kwargs) -> User:
         """Find a user by a specific attribute
         """
         try:
-            find = self._session.query(User).filter_by(**kwargs).first()
-            if not find:
-                raise NoResultFound
+            find = self._session.query(User).filter_by(**kwargs).one()
+        except NoResultFound:
+            raise NoResultFound("No result found")
         except InvalidRequestError:
-            raise
+            raise InvalidRequestError("Invalid request")
         return find
     
     def update_user(self, user_id: int, **kwargs) -> None:
