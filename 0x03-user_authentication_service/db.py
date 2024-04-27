@@ -12,10 +12,10 @@ from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
 logging.disable(logging.WARNING)
 
+
 class DB:
     """DB class
     """
-
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
@@ -32,7 +32,7 @@ class DB:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
         return self.__session
-    
+
     def add_user(self, email: str, hashed_password: str) -> User:
         """Add a user to the database
         """
@@ -45,7 +45,7 @@ class DB:
             self._session.rollback()
             raise
         return user
-    
+
     def find_user_by(self, **kwargs) -> User:
         """Find a user by a specific attribute
         """
@@ -56,7 +56,7 @@ class DB:
         except InvalidRequestError:
             raise InvalidRequestError("Invalid request")
         return find
-    
+
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update a user
         """
@@ -64,13 +64,10 @@ class DB:
             user = self.find_user_by(id=user_id)
         except NoResultFound:
             raise NoResultFound("No result found")
-            
-            
         for key, value in kwargs.items():
             if not hasattr(user, key):
                 raise ValueError("User haf no attribute {}".format(key))
             setattr(user, key, value)
-        
         try:
             self._session.commit()
         except InvalidRequestError:
