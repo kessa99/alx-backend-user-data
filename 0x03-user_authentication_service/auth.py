@@ -13,6 +13,10 @@ from uuid import uuid4
 
 logging.disable(logging.WARNING)
 
+def _hash_password(password: str) -> str:
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed
 
 class Auth:
     """
@@ -23,12 +27,6 @@ class Auth:
         Constructor
         """
         self._db = DB()
-        
-    def _hash_password(self, password: str) -> str:
-        salt = bcrypt.gensalt()
-        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
-        return hashed
-
 
     def register_user(self, email: str, password: str) -> User:
         """
