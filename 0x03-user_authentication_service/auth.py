@@ -1,4 +1,4 @@
-#!/usr/bin/activate
+#!/usr/bin/env python3
 """
 Main file
 """
