@@ -46,7 +46,8 @@ def users():
         if not AUTH.valid_login(email, password):
             abort(401)
         session_id = AUTH.create_session(email)
-        result = jsonify({"email": email, "message": "logged in"})
+        result = jsonify({"email": email, "message": "logged in"}), 200
+        result.status_code = 200
         result.set_cookie("session_id", session_id)
         return result
 
