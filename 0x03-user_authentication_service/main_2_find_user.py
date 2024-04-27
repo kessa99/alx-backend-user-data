@@ -2,8 +2,8 @@
 """
 Main file
 """
-from users.db import DB
-from users.user import User
+from db import DB
+from user import User
 
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
