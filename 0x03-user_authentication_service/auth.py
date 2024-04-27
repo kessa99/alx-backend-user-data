@@ -4,14 +4,15 @@ Main file
 """
 import logging
 import bcrypt
-from users.user import User
-from users.db import DB
+from user import User
+from db import DB
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from flask import jsonify
 from uuid import uuid4
 
 logging.disable(logging.WARNING)
+
 
 class Auth:
     """
@@ -22,11 +23,12 @@ class Auth:
         Constructor
         """
         self._db = DB()
-
+        
     def _hash_password(self, password: str) -> str:
         salt = bcrypt.gensalt()
         hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
         return hashed
+
 
     def register_user(self, email: str, password: str) -> User:
         """
