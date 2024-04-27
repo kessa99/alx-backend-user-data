@@ -2,7 +2,7 @@
 """
 Main file
 """
-from users.auth import Auth
+from auth import Auth
 
 email = 'bob@bob.com'
 password = 'MyPwdOfBob'
