@@ -112,7 +112,7 @@ class Auth:
             return None
         except InvalidRequestError:
             return None
-    
+
     def destroy_session(self, user_id: int) -> None:
         """
         Destroy session
@@ -124,7 +124,7 @@ class Auth:
         except InvalidRequestError:
             pass
         return None
-    
+
     def get_reset_password_token(self, email: str) -> str:
         """
         Get reset password token
@@ -140,7 +140,7 @@ class Auth:
             return None
         except InvalidRequestError:
             return None
-    
+
     def update_password(self, reset_token: str, password: str) -> None:
         """
         Update password
