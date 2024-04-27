@@ -1,5 +1,12 @@
+#!/usr/bin/env python3
+"""
+views module
+"""
+import logging
 from flask import Flask, jsonify, request, abort
-from users.auth import Auth
+from auth import Auth
+
+logging.disable(logging.WARNING)
 
 AUTH = Auth()
 app = Flask(__name__)

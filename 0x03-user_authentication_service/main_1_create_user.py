@@ -3,8 +3,8 @@
 Main file
 """
 
-from users.db import DB
-from users.user import User
+from db import DB
+from user import User
 
 my_db = DB()
 
