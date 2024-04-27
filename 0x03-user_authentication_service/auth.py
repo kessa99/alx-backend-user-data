@@ -98,3 +98,60 @@ class Auth:
             return {"message": "User {} does not exist".format(email)}, 400
         except NoResultFound:
             return None
+
+    def get_user_from_session_id(self, session_id: str) -> str:
+        """
+        Get user from session id
+        """
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+            if user:
+                return user
+            return None
+        except NoResultFound:
+            return None
+        except InvalidRequestError:
+            return None
+    
+    def destroy_session(self, user_id: int) -> None:
+        """
+        Destroy session
+        """
+        try:
+            self._db.update_user(user_id, session_id=None)
+        except NoResultFound:
+            pass
+        except InvalidRequestError:
+            pass
+        return None
+    
+    def get_reset_password_token(self, email: str) -> str:
+        """
+        Get reset password token
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                reset_token = _generate_uuid()
+                self._db.update_user(user.id, reset_token=reset_token)
+                return reset_token
+            return None
+        except NoResultFound:
+            return None
+        except InvalidRequestError:
+            return None
+    
+    def update_password(self, reset_token: str, password: str) -> None:
+        """
+        Update password
+        """
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+            if user:
+                hashed_password = _hash_password(password)
+                self._db.update_user(user.id, hashed_password=hashed_password)
+            return None
+        except NoResultFound:
+            return None
+        except InvalidRequestError:
+            return None
