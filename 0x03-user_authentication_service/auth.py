@@ -43,7 +43,7 @@ class Auth:
             #     raise ValueError("User {} already exists".format(email))
 
             # hasher le mot de passe si l'email n'existe pas
-            hashed_password = self.hash_password(password)
+            hashed_password = _hash_password(password)
 
             #enregistrer le nouvel user a la base de donne
             user = self._db.add_user(email, hashed_password)
