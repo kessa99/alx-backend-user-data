@@ -18,6 +18,12 @@ def _hash_password(password: str) -> str:
     hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed
 
+def _generate_uuid(self) -> str:
+    """
+    Generate a UUID
+    """
+    return str(uuid4())
+
 class Auth:
     """
     Auth class
@@ -81,11 +87,6 @@ class Auth:
             return False
         return False
         
-    def _generate_uuid(self) -> str:
-        """
-        Generate a UUID
-        """
-        return str(uuid4())
     
     def create_session(self, email: str) -> str:
         """
